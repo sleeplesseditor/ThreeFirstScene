@@ -1,6 +1,6 @@
 // set up the environment - 
   // initiallize scene, camera, objects and renderer
-  let scene, camera, renderer, cube, sphere;
+  let scene, camera, renderer, cube, sphere, torus;
     // set up the environment - 
     // initiallize scene, camera, objects and renderer
     let Add = 0.01;
@@ -19,6 +19,13 @@
       scene.add(sphere);
     }
 
+    let createTorus = function(){
+      let geometry = new THREE.TorusGeometry(5, 1, 30, 30);
+      let material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
+      torus = new THREE.Mesh(geometry, material);
+      scene.add(torus);
+    }
+
     let init = function() {
         // create the scene
         scene = new THREE.Scene();
@@ -32,7 +39,8 @@
         camera.position.z = 20;
 
         // createCube();
-        createSphere();
+        // createSphere();
+        createTorus();
         
         // create the renderer   
         renderer = new THREE.WebGLRenderer();   
@@ -50,8 +58,11 @@
         // if(cube.position.x <= -3 || cube.position.x >= 3)
         //   Add *= -1;
 
-        sphere.position.x += Add;
-        sphere.rotation.y += Add;   
+        // sphere.position.x += Add;
+        // sphere.rotation.y += Add;   
+
+        torus.rotation.x += Add;
+        torus.rotation.y += Add;  
 
         renderer.render(scene, camera);
         requestAnimationFrame(mainLoop);
